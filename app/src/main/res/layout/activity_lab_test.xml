@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LabTest_Activity"
-    android:background="@drawable/back2">
+    android:background="@drawable/labtest_image_02">
 
     <TextView
         android:id="@+id/textViewFP"
