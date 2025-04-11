@@ -48,7 +48,7 @@ public class Home_Activity extends AppCompatActivity {
             }
         });
         CardView labtest = findViewById(R.id.cardLabtest);
-        findDoctor.setOnClickListener(new View.OnClickListener() {
+        labtest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Home_Activity.this,LabTest_Activity.class));
