@@ -40,8 +40,8 @@ public class Login_Activity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Login_Activity.this,Home_Activity.class));
-                /*String username = edUsername.getText().toString();
+                //startActivity(new Intent(Login_Activity.this,Home_Activity.class));
+                String username = edUsername.getText().toString();
                 String password = edPassword.getText().toString();
                 DataBase db = new DataBase(getApplicationContext(),"Nyxcare",null,1);
                 if (username.length() == 0 || password.length() == 0) {
@@ -58,7 +58,7 @@ public class Login_Activity extends AppCompatActivity {
                     }else {
                         Toast.makeText(getApplicationContext(),"Invalid Username and Password!!",Toast.LENGTH_SHORT).show();
                     }
-                }*/
+                }
             }
         });
         tv.setOnClickListener(new View.OnClickListener() {
