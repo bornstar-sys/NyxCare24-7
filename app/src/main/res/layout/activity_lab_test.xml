@@ -53,16 +53,18 @@
 
     <ListView
         android:id="@+id/listViewLabTest"
-        android:layout_width="377dp"
-        android:layout_height="401dp"
+        android:layout_width="383dp"
+        android:layout_height="386dp"
         android:layout_margin="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="160dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLTtittle"
         app:layout_constraintVertical_bias="0.215" />
