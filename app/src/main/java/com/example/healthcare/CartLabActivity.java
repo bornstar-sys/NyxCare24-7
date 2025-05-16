@@ -57,7 +57,7 @@ public class CartLabActivity extends AppCompatActivity {
 
         SharedPreferences sharedpreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
         String username = sharedpreferences.getString("username","").toString();
-        DataBase db = new DataBase(getApplicationContext(),"healthCare",null,1);
+        DataBase db = new DataBase(getApplicationContext(),"NyxCare",null,1);
 
         float totalamount = 0;
         ArrayList dbData = db.getCartData(username,"lab");
@@ -109,6 +109,7 @@ public class CartLabActivity extends AppCompatActivity {
                 it.putExtra("price",tvtotal.getText());
                 it.putExtra("date",datebutton.getText());
                 it.putExtra("time",timebutton.getText());
+                startActivity(it);
             }
         });
         //datePicker

@@ -37,7 +37,7 @@ public class Book_Appointment_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_book_appointment);
 
         // Initialize DataBase with parameters
-        dbHelper = new DataBase(this, "Healthcare.db", null, 1);
+        dbHelper = new DataBase(this, "NyxCare", null, 1);
 
         // Create appointments table if it doesn't exist
         createAppointmentsTable();

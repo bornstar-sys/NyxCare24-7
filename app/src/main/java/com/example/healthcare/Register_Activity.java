@@ -45,7 +45,7 @@ public class Register_Activity extends AppCompatActivity {
                 String email = edEmail.getText().toString();
                 String password = edPassword.getText().toString();
                 String confirm = edConfirm.getText().toString();
-                DataBase db = new DataBase(getApplicationContext(),"Nyxcare",null,1);
+                DataBase db = new DataBase(getApplicationContext(),"NyxCare",null,1);
                 if (username.length() == 0 || email.length() == 0 || password.length() == 0 || confirm.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill all details!", Toast.LENGTH_SHORT).show();
                 } else {
