@@ -1,4 +1,3 @@
-// Register_Activity.java
 package com.example.healthcare;
 
 import android.content.Intent;
@@ -20,6 +19,7 @@ public class Register_Activity extends AppCompatActivity {
     EditText edUsername, edEmail, edPassword, edConfirm;
     Button btn;
     TextView tv1;
+    DataBase db; // Declare at class level for onDestroy
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +31,13 @@ public class Register_Activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         edUsername = findViewById(R.id.editTextRigUsername);
         edEmail = findViewById(R.id.editTextRigEmail);
         edPassword = findViewById(R.id.editTextRigPassword);
         edConfirm = findViewById(R.id.editTextRigConfirmPassword2);
         tv1 = findViewById(R.id.textViewuserExist);
-        btn = findViewById(R.id.buttonRegister); // Corrected ID
+        btn = findViewById(R.id.buttonRegister);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,17 +46,22 @@ public class Register_Activity extends AppCompatActivity {
                 String email = edEmail.getText().toString();
                 String password = edPassword.getText().toString();
                 String confirm = edConfirm.getText().toString();
-                DataBase db = new DataBase(getApplicationContext(),"NyxCare",null,1);
+                // Use the single-parameter constructor
+                db = new DataBase(getApplicationContext());
                 if (username.length() == 0 || email.length() == 0 || password.length() == 0 || confirm.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill all details!", Toast.LENGTH_SHORT).show();
                 } else {
                     if (password.compareTo(confirm) == 0) {
                         if (isValid(password)) {
-                            db.register(username,email,password);
-                            Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(Register_Activity.this, Login_Activity.class));
+                            boolean success = db.register(username, email, password);
+                            if (success) {
+                                Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(Register_Activity.this, Login_Activity.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Registration Failed! Username or Email may already exist.", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Password must contain at least 8 character, having letter,digit and special character!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Password must contain at least 8 characters, including a letter, digit, and special character!", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "Password and Confirm Password didn't match!", Toast.LENGTH_SHORT).show();
@@ -70,6 +76,14 @@ public class Register_Activity extends AppCompatActivity {
                 startActivity(new Intent(Register_Activity.this, Login_Activity.class));
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (db != null) {
+            db.close();
+        }
     }
 
     public static boolean isValid(String passwordhere) {

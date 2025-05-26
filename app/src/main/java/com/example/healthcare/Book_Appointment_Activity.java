@@ -28,7 +28,7 @@ public class Book_Appointment_Activity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
     private Button dateButton, timeButton, btnBook, btnback;
-    private DataBase dbHelper;  // Using your existing DataBase class
+    private DataBase dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +36,8 @@ public class Book_Appointment_Activity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_book_appointment);
 
-        // Initialize DataBase with parameters
-        dbHelper = new DataBase(this, "NyxCare", null, 1);
-
-        // Create appointments table if it doesn't exist
-        createAppointmentsTable();
+        // Initialize DataBase with only Context
+        dbHelper = new DataBase(this);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -61,7 +58,7 @@ public class Book_Appointment_Activity extends AppCompatActivity {
 
         // Get title and fee from Intent
         Intent it = getIntent();
-        //String title = it.getStringExtra("text1");
+        //String title = it.getStringExtra("text1"); // Commented out as in your code
         String fee = it.getStringExtra("text5");
 
         // Set title (remains unchanged)
@@ -101,7 +98,7 @@ public class Book_Appointment_Activity extends AppCompatActivity {
             // Store in database
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
-            //values.put("title", title);
+            //values.put("title", title); // Commented out as in your code
             values.put("full_name", fullName);
             values.put("address", address);
             values.put("phone", phone);
@@ -125,21 +122,6 @@ public class Book_Appointment_Activity extends AppCompatActivity {
 
             db.close();
         });
-    }
-
-    private void createAppointmentsTable() {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS appointments (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "title TEXT," +
-                "full_name TEXT," +
-                "address TEXT," +
-                "phone TEXT," +
-                "fee TEXT," +
-                "date TEXT," +
-                "time TEXT)";
-        db.execSQL(createTableQuery);
-        db.close();
     }
 
     private void setDatePickerDialog() {
