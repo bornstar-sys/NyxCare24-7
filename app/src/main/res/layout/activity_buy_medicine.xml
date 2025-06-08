@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@drawable/labtest_image_03"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LabTest_Details_Activity"
-    android:background="@drawable/back1">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewLTD1"
+        android:id="@+id/textViewPS1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NyxCare 24*7 "
@@ -18,13 +16,12 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.062" />
 
     <TextView
-        android:id="@+id/textViewLTDtittle2"
+        android:id="@+id/textViewPStittle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location : Bhubaneswar"
@@ -32,65 +29,46 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLTD1"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPS1"
+        app:layout_constraintVertical_bias="0.056" />
 
     <TextView
-        android:id="@+id/textViewLTDtittle"
+        android:id="@+id/textViewPStittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lab Test and Packages"
+        android:text="Pharmacy Store"
         android:textColor="@color/colorWhite"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLTD1"
-        app:layout_constraintVertical_bias="0.112" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPS1"
+        app:layout_constraintVertical_bias="0.135" />
 
-    <EditText
-        android:id="@+id/editTextLTD"
-        android:layout_width="327dp"
-        android:layout_height="328dp"
-        android:layout_marginTop="40dp"
-        android:editable="false"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:padding="10dp"
-        android:text="hi\nHello"
-        android:textColor="@color/colorWhite"
+    <ListView
+        android:id="@+id/listViewBuymedicine"
+        android:layout_width="383dp"
+        android:layout_height="386dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="160dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLTDtittle"
-        tools:ignore="MissingConstraint" />
-
-    <TextView
-        android:id="@+id/textViewCharge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:text="charge"
-        android:textAlignment="center"
-        android:textColor="#33CC00"
-        android:textSize="20sp"
-        android:textStyle="italic|bold"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLTDCart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLTD"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPStittle"
+        app:layout_constraintVertical_bias="0.215" />
 
     <Button
-        android:id="@+id/buttonLTDBack"
+        android:id="@+id/buttonPSBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -101,16 +79,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonLTDCart"
+        android:id="@+id/buttonPSCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:drawableLeft="@drawable/ic_cart"
-        android:text="Add to Cart"
+        android:text="GO to Cart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

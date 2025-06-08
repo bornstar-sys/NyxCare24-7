@@ -1,4 +1,3 @@
-// Login_Activity.java
 package com.example.healthcare;
 
 import android.content.Context;
@@ -21,6 +20,7 @@ public class Login_Activity extends AppCompatActivity {
     EditText edUsername, edPassword;
     Button btn;
     TextView tv;
+    DataBase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,40 +32,42 @@ public class Login_Activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         edUsername = findViewById(R.id.editTextLoginUsername);
         edPassword = findViewById(R.id.editTextLoginPassword);
         btn = findViewById(R.id.buttonLogin);
         tv = findViewById(R.id.textViewNewuser);
+        db = new DataBase(this);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Login_Activity.this,Home_Activity.class));
-                /*String username = edUsername.getText().toString();
-                String password = edPassword.getText().toString();
-                DataBase db = new DataBase(getApplicationContext(),"Nyxcare",null,1);
-                if (username.length() == 0 || password.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Please fill all details!", Toast.LENGTH_SHORT).show();
+        btn.setOnClickListener(view -> {
+            String username = edUsername.getText().toString().trim();
+            String password = edPassword.getText().toString().trim();
+
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Please fill all details!", Toast.LENGTH_SHORT).show();
+            } else {
+                if (db.login(username, password)) {
+                    Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
+                    SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("username", username);
+                    editor.apply();
+                    startActivity(new Intent(Login_Activity.this, Home_Activity.class));
+                    finish(); // Close Login_Activity to prevent back navigation
                 } else {
-                    if (db.login(username,password)==1) {
-                        Toast.makeText(getApplicationContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
-                        // Implement actual login logic here later.
-                        SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("username",username);     //to save your data with key and value.
-                        editor.apply();
-                        startActivity(new Intent(Login_Activity.this,Home_Activity.class));
-                    }else {
-                        Toast.makeText(getApplicationContext(),"Invalid Username and Password!!",Toast.LENGTH_SHORT).show();
-                    }
-                }*/
+                    Toast.makeText(getApplicationContext(), "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Login_Activity.this, Register_Activity.class));
-            }
-        });
+
+        tv.setOnClickListener(view -> startActivity(new Intent(Login_Activity.this, Register_Activity.class)));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (db != null) {
+            db.close();
+        }
     }
 }

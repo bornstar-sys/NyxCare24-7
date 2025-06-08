@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back2"
-    tools:context=".LabBook">
+    tools:context=".BuyMedicineOrderActivity">
 
     <TextView
         android:id="@+id/textview_logo_9"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textview_logo_9" />
 
     <EditText
-        android:id="@+id/editTextLTBFullName"
+        android:id="@+id/editTextBMBFullName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textviewPackageName3" />
 
     <EditText
-        android:id="@+id/LTBPincode"
+        android:id="@+id/BMBPincode"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
@@ -81,10 +81,10 @@
         android:textColorHint="@color/material_dynamic_neutral60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLTBFullName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextBMBFullName" />
 
     <EditText
-        android:id="@+id/editTextLBContact"
+        android:id="@+id/editTextBMBContact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -105,10 +105,10 @@
         android:textColorHint="@color/material_dynamic_neutral60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LTBPincode" />
+        app:layout_constraintTop_toBottomOf="@+id/BMBPincode" />
 
     <EditText
-        android:id="@+id/editTextLBTextAddress"
+        android:id="@+id/editTextBMBTextAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -129,10 +129,10 @@
         android:textColorHint="@color/material_dynamic_neutral60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLBContact" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextBMBContact" />
 
     <Button
-        android:id="@+id/buttonLTBBooking"
+        android:id="@+id/buttonBMBBooking"
         android:layout_width="345dp"
         android:layout_height="50dp"
         android:layout_marginTop="44dp"
@@ -141,7 +141,6 @@
         android:shadowColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLBTextAddress" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editTextBMBTextAddress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

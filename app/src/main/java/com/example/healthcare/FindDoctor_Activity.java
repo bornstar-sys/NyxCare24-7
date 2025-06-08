@@ -23,6 +23,7 @@ public class FindDoctor_Activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         CardView exit = findViewById(R.id.cardFDback);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override

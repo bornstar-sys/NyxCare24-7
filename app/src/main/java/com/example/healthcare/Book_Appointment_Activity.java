@@ -3,9 +3,9 @@ package com.example.healthcare;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +27,7 @@ public class Book_Appointment_Activity extends AppCompatActivity {
     TextView tv;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
-    private Button dateButton, timeButton, btnBook, btnback;
+    private Button dateButton, timeButton, btnBook, btnBack;
     private DataBase dbHelper;
 
     @Override
@@ -36,7 +36,6 @@ public class Book_Appointment_Activity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_book_appointment);
 
-        // Initialize DataBase with only Context
         dbHelper = new DataBase(this);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -45,7 +44,6 @@ public class Book_Appointment_Activity extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize views
         tv = findViewById(R.id.textViewBookAppointmenttext);
         ed1 = findViewById(R.id.editTextBAFullName);
         ed2 = findViewById(R.id.editTextBAAddress);
@@ -54,73 +52,63 @@ public class Book_Appointment_Activity extends AppCompatActivity {
         dateButton = findViewById(R.id.buttonBADate);
         timeButton = findViewById(R.id.buttonBATime);
         btnBook = findViewById(R.id.buttonBAdone);
-        btnback = findViewById(R.id.buttonBack);
+        btnBack = findViewById(R.id.buttonBack);
 
-        // Get title and fee from Intent
         Intent it = getIntent();
-        //String title = it.getStringExtra("text1"); // Commented out as in your code
+        String doctorName = it.getStringExtra("text1");
         String fee = it.getStringExtra("text5");
 
-        // Set title (remains unchanged)
-        //tv.setText(title);
-
-        // Set fee (fetched from Intent)
+        tv.setText(doctorName);
         ed4.setText("Cons fee: " + fee + "/-");
-        ed4.setKeyListener(null);  // Make fee field read-only
+        ed4.setKeyListener(null);
 
-        // Initialize pickers
         setDatePickerDialog();
         setTimePickerDialog();
 
-        // Set click listeners
         dateButton.setOnClickListener(view -> datePickerDialog.show());
         timeButton.setOnClickListener(view -> timePickerDialog.show());
 
-        btnback.setOnClickListener(view ->
+        btnBack.setOnClickListener(view ->
                 startActivity(new Intent(Book_Appointment_Activity.this, FindDoctor_Activity.class)));
 
         btnBook.setOnClickListener(view -> {
-            // Get all input values
-            String fullName = ed1.getText().toString().trim();
+            SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+            String username = sharedPreferences.getString("username", "");
+
+            String patientName = ed1.getText().toString().trim(); // Optional patient name
             String address = ed2.getText().toString().trim();
             String phone = ed3.getText().toString().trim();
-            String appointmentFee = fee;  // Use fee from Intent
             String date = dateButton.getText().toString();
             String time = timeButton.getText().toString();
 
-            // Validate inputs
-            if (fullName.isEmpty() || address.isEmpty() || phone.isEmpty() ||
+            if (patientName.isEmpty() || address.isEmpty() || phone.isEmpty() ||
                     date.equals("Select Date") || time.equals("Select Time")) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Store in database
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            //values.put("title", title); // Commented out as in your code
-            values.put("full_name", fullName);
-            values.put("address", address);
-            values.put("phone", phone);
-            values.put("fee", appointmentFee);
-            values.put("date", date);
-            values.put("time", time);
+            // Check for duplicate appointment
+            if (dbHelper.checkAppointmentExists(username, doctorName, address, phone, date, time)) {
+                Toast.makeText(this, "Appointment is already booked", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            long result = db.insert("appointments", null, values);
+            try {
+                float appointmentFee = Float.parseFloat(fee);
+                dbHelper.addOrder(username, doctorName, address, phone, 0, date, time, appointmentFee, "appointment");
 
-            if (result != -1) {
                 Toast.makeText(this, "Appointment booked successfully", Toast.LENGTH_SHORT).show();
-                // Clear fields after successful booking
                 ed1.setText("");
                 ed2.setText("");
                 ed3.setText("");
                 dateButton.setText("Select Date");
                 timeButton.setText("Select Time");
-            } else {
-                Toast.makeText(this, "Booking failed", Toast.LENGTH_SHORT).show();
-            }
 
-            db.close();
+                Intent intent = new Intent(Book_Appointment_Activity.this, OrderDetailsActivity.class);
+                startActivity(intent);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Invalid fee format", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

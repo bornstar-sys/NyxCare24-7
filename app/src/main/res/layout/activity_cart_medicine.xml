@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@drawable/labtest_image_03"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LabTest_Activity"
-    android:background="@drawable/labtest_image_02">
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/textViewLT1"
+        android:id="@+id/textViewCart1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NyxCare 24*7 "
@@ -18,24 +17,25 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
-        android:id="@+id/textViewLTtittle"
+        android:id="@+id/textViewCarttittle3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lab Test and Packages"
+        android:text="Pharmacy Store"
         android:textColor="@color/colorWhite"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLT1"
-        app:layout_constraintVertical_bias="0.135" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCart1"
+        app:layout_constraintVertical_bias="0.047" />
 
     <TextView
         android:id="@+id/textViewLTtittle2"
@@ -46,31 +46,64 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLT1"
-        app:layout_constraintVertical_bias="0.056" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCart1"
+        app:layout_constraintVertical_bias="0.011" />
 
     <ListView
-        android:id="@+id/listViewLabTest"
-        android:layout_width="383dp"
-        android:layout_height="386dp"
+        android:id="@+id/listViewCartBMmain"
+        android:layout_width="377dp"
+        android:layout_height="343dp"
         android:layout_margin="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="160dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLTtittle"
-        app:layout_constraintVertical_bias="0.215" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCarttittle3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewCartCostBM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Total Cost: 100/-"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewCartBMmain" />
+
+    <TextView
+        android:id="@+id/textViewBADate1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Select Date"
+        android:textColor="@color/yellowLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCartCostBM" />
 
     <Button
-        android:id="@+id/buttonLTBack"
+        android:id="@+id/buttonBMCartDate"
+        style="?android:spinnerStyle"
+        android:layout_width="174dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:text="01/04/2025"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBADate1" />
+
+    <Button
+        android:id="@+id/buttonBMCartback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -81,12 +114,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonLTCart"
+        android:id="@+id/buttonBMcheckout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:drawableLeft="@drawable/ic_cart"
-        android:text="GO to Cart"
+        android:text="Check Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"

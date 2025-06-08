@@ -15,6 +15,27 @@
         android:theme="@style/Theme.HealthCare"
         tools:targetApi="31">
         <activity
+            android:name=".HealthArticleDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HeathArticleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BuyMedicineOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BuyMedicineDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BuyMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".LabBook"
             android:exported="false" />
         <activity

@@ -15,7 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class LabBook extends AppCompatActivity {
+public class BuyMedicineOrderActivity extends AppCompatActivity {
 
     EditText edname,edaddress,edphone,edpincode;
     Button btnbook/*,btnback*/;
@@ -24,25 +24,23 @@ public class LabBook extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_lab_book);
+        setContentView(R.layout.activity_buy_medicine_order);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        edname = findViewById(R.id.editTextLTBFullName);
-        edaddress = findViewById(R.id.editTextLBTextAddress);
-        edphone = findViewById(R.id.editTextLBContact);
-        edpincode = findViewById(R.id.LTBPincode);
-        btnbook = findViewById(R.id.buttonLTBBooking);
+
+        edname = findViewById(R.id.editTextBMBFullName);
+        edaddress = findViewById(R.id.editTextBMBTextAddress);
+        edphone = findViewById(R.id.editTextBMBContact);
+        edpincode = findViewById(R.id.BMBPincode);
+        btnbook = findViewById(R.id.buttonBMBBooking);
 
         Intent intent = getIntent();
         String[] price = intent.getStringExtra("price").toString().split(java.util.regex.Pattern.quote(":"));
         String date = intent.getStringExtra("date");
-        String time = intent.getStringExtra("time");
-
-        /*btnback.setOnClickListener(view ->
-                startActivity(new Intent(LabBook.this,CartLabActivity.class)));*/
+        //String time = intent.getStringExtra("time");
 
         btnbook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +49,10 @@ public class LabBook extends AppCompatActivity {
                 String username = sharedPreferences.getString("username","").toString();
 
                 DataBase db = new DataBase(getApplicationContext());
-                db.addOrder(username,edname.getText().toString(),edaddress.getText().toString(),edphone.getText().toString(),Integer.parseInt(edpincode.getText().toString()),date.toString(),time.toString(),Float.parseFloat(price[1].toString()),"lab");
-                db.removeCart(username,"lab");
+                db.addOrder(username,edname.getText().toString(),edaddress.getText().toString(),edphone.getText().toString(),Integer.parseInt(edpincode.getText().toString()),date.toString(),"",Float.parseFloat(price[1].toString()),"medicine");
+                db.removeCart(username,"medicine");
                 Toast.makeText(getApplicationContext(),"Your booking is done Completely...",Toast.LENGTH_LONG).show();
-                startActivity(new Intent(LabBook.this,Home_Activity.class));
+                startActivity(new Intent(BuyMedicineOrderActivity.this,Home_Activity.class));
             }
         });
     }
