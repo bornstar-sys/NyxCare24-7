@@ -48,3 +48,5 @@ We welcome contributions to enhance NyxCare24-7. To contribute:
 Fork the Repository:
 
 Click on the "Fork" button at the top right of the repository page.
+
+To see the final product of the project go on this DRIVE LINK :  https://drive.google.com/file/d/1dhI-BXwrVyNF2Zf5bIEni2hmHXv3Km6C/view?usp=sharing
